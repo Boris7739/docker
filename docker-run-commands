@@ -1,0 +1,7 @@
+docker run --name prometheus -p 9090:9090 --network prometheus-network -d -v /Users/borisgamanuk/Downloads/prometheus.yaml:/etc/prometheus/prometheus.yml -v /Users/borisgamanuk/Downloads/alert-rules.yaml:/etc/prometheus/alert-rules.yaml bitnami/prometheus --config.file=/etc/prometheus/prometheus.yaml
+
+docker run --name node-exporter -p 9100:9100 -d --network prometheus-network bitnami/node-exporter:latest
+
+docker run -d --name=grafana -p 3000:3000 --network prometheus-network  grafana/grafana 
+
+docker run --name alertmanager -d -p 9093:9093 --network prometheus--network bitnami/alertmanager:latest
